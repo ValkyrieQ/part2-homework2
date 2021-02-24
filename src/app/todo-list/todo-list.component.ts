@@ -22,4 +22,8 @@ export class TodoListComponent implements OnInit {
       this.taskElement.nativeElement.focus();
     }
   }
+
+  deleteTask(taskIndex: number) {
+    this.tasks = this.tasks.filter((item, index) => index !== taskIndex);
+  }
 }
