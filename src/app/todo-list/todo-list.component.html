@@ -1,0 +1,10 @@
+<p>My Tasks today</p>
+<ul>
+  <li *ngFor="let task of tasks">{{ task }}</li>
+</ul>
+<b>Task: </b><input type="text" #task [(ngModel)]="newTask" /><button
+  (click)="addTask()"
+  [disabled]="newTask.trim().length == 0"
+>
+  Add Task
+</button>
