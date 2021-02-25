@@ -1,0 +1,21 @@
+.container {
+  border: 1px solid black;
+  display: inline-block;
+  padding: 10px;
+  width: auto;
+}
+.add-task-container {
+  border: 1px solid black;
+  display: inline-block;
+  padding: 5px 10px 10px 10px;
+  margin-top: 10px;
+  /* text-align: center; */
+}
+
+.task-detail {
+  text-align: right;
+}
+
+.task-detail > div {
+  padding: 5px 0px;
+}

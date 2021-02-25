@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Task } from '../model/task';
 
 @Component({
   selector: 'app-todo-list',
@@ -6,24 +7,35 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['./todo-list.component.css'],
 })
 export class TodoListComponent implements OnInit {
-  @ViewChild('task') taskElement: ElementRef;
+  @ViewChild('taskName') taskName: ElementRef;
 
-  tasks: string[] = [];
-  newTask: string = '';
+  newTask: Task;
+  tasks: Task[];
 
-  constructor() {}
+  constructor() {
+    this.tasks = [];
+    this.newTask = new Task();
+  }
 
   ngOnInit(): void {}
 
   addTask() {
-    if (this.newTask !== '') {
-      this.tasks.push(this.newTask);
-      this.newTask = '';
-      this.taskElement.nativeElement.focus();
-    }
+    this.newTask.id = this.tasks.length
+      ? this.tasks.reduce((prev, cur) =>
+          prev && cur.id > prev.id ? cur : prev
+        ).id + 1
+      : 0;
+    this.tasks.push(this.newTask);
+    this.clear();
   }
 
-  deleteTask(taskIndex: number) {
-    this.tasks = this.tasks.filter((item, index) => index !== taskIndex);
+  clear() {
+    this.newTask = new Task();
+    this.taskName.nativeElement.focus();
+  }
+
+  deleteTask(taskItem: Task) {
+    this.tasks = this.tasks.filter((task) => task !== taskItem);
+    this.taskName.nativeElement.focus();
   }
 }
