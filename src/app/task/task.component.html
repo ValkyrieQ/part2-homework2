@@ -1,4 +1,4 @@
-<div class="task">
+<div class="task" (click)="showDetail()" [class.selected]="isSelected">
   {{ taskItem.name }}
   <button class="btn btn-danger btn-sm" (click)="delete()">Delete</button>
 </div>

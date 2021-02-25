@@ -1,5 +1,13 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  ViewChildren,
+  QueryList,
+} from '@angular/core';
 import { Task } from '../model/task';
+import { TaskComponent } from '../task/task.component';
 
 @Component({
   selector: 'app-todo-list',
@@ -8,9 +16,11 @@ import { Task } from '../model/task';
 })
 export class TodoListComponent implements OnInit {
   @ViewChild('taskName') taskName: ElementRef;
+  @ViewChildren(TaskComponent) taskComponentList: QueryList<TaskComponent>;
 
   newTask: Task;
   tasks: Task[];
+  selectedTask: Task;
 
   constructor() {
     this.tasks = [];
@@ -37,5 +47,18 @@ export class TodoListComponent implements OnInit {
   deleteTask(taskItem: Task) {
     this.tasks = this.tasks.filter((task) => task !== taskItem);
     this.taskName.nativeElement.focus();
+  }
+
+  showTaskDetail(taskComp: TaskComponent) {
+    if (taskComp.isSelected) {
+      taskComp.isSelected = false;
+      this.selectedTask = null;
+    } else {
+      this.taskComponentList.forEach((taskComponent: TaskComponent) => {
+        taskComponent.isSelected = false;
+      });
+      taskComp.isSelected = true;
+      this.selectedTask = taskComp.taskItem;
+    }
   }
 }

@@ -3,13 +3,12 @@
   display: inline-block;
   padding: 10px;
   width: auto;
+  width: 40vw;
 }
 .add-task-container {
   border: 1px solid black;
-  display: inline-block;
   padding: 5px 10px 10px 10px;
   margin-top: 10px;
-  /* text-align: center; */
 }
 
 .task-detail {
@@ -18,4 +17,19 @@
 
 .task-detail > div {
   padding: 5px 0px;
+}
+
+.show-task-container {
+  border: 1px solid black;
+  padding: 5px 10px 10px 10px;
+  margin-top: 10px;
+  word-break: break-all;
+}
+
+.task-name {
+  font-weight: bold;
+}
+
+.task-description > span {
+  font-size: 0.8rem;
 }
