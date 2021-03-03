@@ -46,6 +46,8 @@ export class TodoListComponent implements OnInit {
 
   deleteTask(taskItem: Task) {
     this.tasks = this.tasks.filter((task) => task !== taskItem);
+    this.selectedTask = null;
+    this.resetSelectedTask();
     this.taskName.nativeElement.focus();
   }
 
@@ -54,11 +56,15 @@ export class TodoListComponent implements OnInit {
       taskComp.isSelected = false;
       this.selectedTask = null;
     } else {
-      this.taskComponentList.forEach((taskComponent: TaskComponent) => {
-        taskComponent.isSelected = false;
-      });
+      this.resetSelectedTask();
       taskComp.isSelected = true;
       this.selectedTask = taskComp.taskItem;
     }
+  }
+
+  resetSelectedTask() {
+    this.taskComponentList.forEach((taskComponent: TaskComponent) => {
+      taskComponent.isSelected = false;
+    });
   }
 }
